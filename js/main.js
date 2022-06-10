@@ -18,7 +18,7 @@ dk = 0.05 * k;
 k1 = k + dk;
 k2 = k - dk;
 freq = 1;
-df = 0.1;
+df = -0.5;
 f1 = freq + df;
 f2 = freq - df;
 class Wave {
@@ -63,7 +63,7 @@ function plot() {
     d5[i] = [x,a];
     d4[i] = [x,b];
 
-    d7 = [t*df/dk +  (0.5*pi *(df/dk)/(df)) , 0];
+    d7 = [t*df/dk +  (1.5*pi/dk) , 0];
     // if((2 * 1 * Math.cos(df * t - dk * x ) )===0)
     // {
 
