@@ -1,39 +1,49 @@
 <!doctype html>
-<html class="no-js" lang="">
-
+<html lang="">
 <head>
-  <meta charset="utf-8">
-  <title>Group velocity visualizer</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-
-  <meta name="theme-color" content="#fafafa">
+    <meta charset="utf-8">
+    <title>Group velocity</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
-
 <body>
 
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script  type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
-  <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
-<!--  <script src="js/plugins.js"></script>-->
-  <script src="js/main.js"></script>
-  <h3>Oscillating Sine Wave</h3>
-  <div id="placeholder1" style="height:300px;"></div>
-  <div id="placeholder2" style="height:300px;"></div>
-  <div id="placeholder3" style="height:600px;"></div>
-<!--  <canvas id="canvas" width="500" height="100"></canvas>-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+
+<script src="js/wave.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ui.js"></script>
+
+<nav class="navbar navbar-expand-lg bg-light" style="height: 4vh">
+    <div class="container-fluid">
+        <span class="navbar-brand" href="#">Group velocity</span>
+    </div>
+</nav>
+<div class="row m-0" style="height: 95vh; margin-top: 1vh">
+    <div class="col-8">
+        <div class="row h-25">
+            <div id="firstWave">
+            </div>
+        </div>
+        <div class="row h-25">
+            <div id="secondWave"></div>
+        </div>
+        <div class="row h-50">
+            <div id="sumWave"></div>
+        </div>
+    </div>
+    <div class="col-4" style="margin-top: 8px">
+        Choose preset:
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" id="btn-below0" class="btn btn-secondary active preset-clicker">V<sub>g</sub> < 0
+            </button>
+            <button type="button" id="btn-equal0" class="btn btn-secondary preset-clicker">V<sub>g</sub> = 0</button>
+            <button type="button" id="btn-above0" class="btn btn-secondary preset-clicker">V<sub>g</sub> > 0</button>
+        </div>
+    </div>
+</div>
 
 </body>
 
