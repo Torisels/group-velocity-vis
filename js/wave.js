@@ -9,4 +9,6 @@ class Wave {
     getY(x, t) {
         return this.A * Math.cos(this.k * x - this.omega * t + this.phase)
     }
+
+
 }

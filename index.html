@@ -6,43 +6,152 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
+    <style>
+        .splitscreen {
+            display: flex;
+        }
+
+        .l {
+            align-items: center;
+            display: flex;
+        }
+
+        .r {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+
+    </style>
 </head>
 <body>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+<script src="js/colorsSettings.js"></script>
+<script src="js/ui.js"></script>
 <script src="js/wave.js"></script>
 <script src="js/main.js"></script>
-<script src="js/ui.js"></script>
 
-<nav class="navbar navbar-expand-lg bg-light" style="height: 4vh">
+<nav class="navbar navbar-expand-lg  navbar-light bg-light" style="height: 4vh; margin-bottom: 1px">
     <div class="container-fluid">
         <span class="navbar-brand" href="#">Group velocity</span>
+
     </div>
 </nav>
 <div class="row m-0" style="height: 95vh; margin-top: 1vh">
-    <div class="col-8">
+    <div class="col-9">
+        <!--        <span>y<sub>1</sub></span>-->
         <div class="row h-25">
             <div id="firstWave">
             </div>
         </div>
+        <!--        <span>y<sub>2</sub></span>-->
         <div class="row h-25">
             <div id="secondWave"></div>
         </div>
+        <!--        <span>y<sub>1</sub>+y<sub>2</sub></span>-->
         <div class="row h-50">
             <div id="sumWave"></div>
         </div>
     </div>
-    <div class="col-4" style="margin-top: 8px">
-        Choose preset:
-        <div class="btn-group" role="group" aria-label="Basic example">
+    <div class="col-2" style="margin-top: 8px">
+        <div>Choose preset:</div>
+        <div class="btn-group col-12" role="group" aria-label="Basic example" style="margin-top: 10px">
             <button type="button" id="btn-below0" class="btn btn-secondary active preset-clicker">V<sub>g</sub> < 0
             </button>
-            <button type="button" id="btn-equal0" class="btn btn-secondary preset-clicker">V<sub>g</sub> = 0</button>
-            <button type="button" id="btn-above0" class="btn btn-secondary preset-clicker">V<sub>g</sub> > 0</button>
+            <button type="button" id="btn-equal0" class="btn btn-secondary preset-clicker">V<sub>g</sub> = 0
+            </button>
+            <button type="button" id="btn-above0" class="btn btn-secondary preset-clicker">V<sub>g</sub> > 0
+            </button>
         </div>
+        <br>
+        <label for="speedRange" class="form-label" style="margin-top: 10px">Speed: (<span
+                id="speedSpan">1</span>x)</label>
+        <input type="range" class="form-range" id="speedRange" min="0.0" max="2" step="0.01" value="1">
+        <label for="resetSpeed" class="form-label" style="margin-top: 10px" data-toggle="tooltip" data-placement="top"
+               title="Resolution - higher resolution gives lower FPS">Resolution: (<span
+                id="resolutionspan">1000</span>)</label>
+        <input type="range" class="form-range" id="resolutionRange" min="500" max="2500" step="10" value="1000"
+               data-toggle="tooltip" data-placement="top" title="Resolution - higher resolution gives lower FPS">
+
+
+        <div class="splitscreen">
+            <div class="l col-6">
+                <button type="button" class="btn btn-secondary" id="resetSpeed" style="width: 100%;margin-right: 5px">
+                    Reset speed
+                </button>
+            </div>
+            <div class="r" style="width: 50%">
+                <button class="btn btn-secondary" type="button" id="changeColors" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample" style="width: 100%; margin-left: 5px">
+                    Edit colors
+                </button>
+            </div>
+        </div>
+
+
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <div class="splitscreen row">
+                    <div class="l col-8">
+                        First wave color:
+                    </div>
+                    <div class="r col-4">
+                        <span id="firstWavePicker"></span>
+                    </div>
+                </div>
+                <div class="splitscreen row">
+                    <div class="l col-8">
+                        Second wave color:
+                    </div>
+                    <div class="r col-4">
+                        <span id="secondWavePicker"></span>
+                    </div>
+                </div>
+                <div class="splitscreen row">
+                    <div class="l col-8">
+                        Sum wave color:
+                    </div>
+                    <div class="r col-4">
+                        <span id="sumWavePicker"></span>
+                    </div>
+                </div>
+                <div class="splitscreen row">
+                    <div class="l col-8">
+                        Dot color:
+                    </div>
+                    <div class="r col-4">
+                        <span type="button" id="dotPicker" class="btn btn-secondary"></span>
+                    </div>
+                </div>
+                <div class="splitscreen row">
+                    <div class="l col-8">
+                        Envelope color:
+                    </div>
+                    <div class="r col-4">
+                        <span type="button" id="envelopePicker" class="btn btn-secondary"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px">
+                    <div class="col col-12 center-block">
+                        <button type="button" class="btn btn-secondary" id="resetColors">Reset to default</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </div>
 
 </body>

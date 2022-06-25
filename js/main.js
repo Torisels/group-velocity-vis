@@ -1,4 +1,5 @@
 "use strict";
+
 // constants
 const xMin = 0;
 const xMax = 2 * Math.PI;
@@ -7,18 +8,20 @@ const yPadding = 0.5
 const yMin = -(amplitude + yPadding);
 const yMax = -yMin;
 
-const resolution = 2000;
-const resolutionMaxRatio = xMax / resolution;
+let resolution = 1000;
+let resolutionMaxRatio;
 const circleSize = 4;
 
 // wave constants
-const dt = 0.25;
-const k = 15;
+let speedMultiplier = 1;
+const dt_c = 0.25;
+let dt = speedMultiplier * dt_c;
+const k = 20;
 const dk = 0.05 * k;
 const k1 = k + dk;
 const k2 = k - dk;
 const freq = 1;
-const basedf = 0.05;
+const basedf = 0.07;
 // global variables for waves
 let df;
 let f1;
@@ -53,6 +56,7 @@ let sumPoint;
 let firstUpperPoint;
 let secondUpperPoint;
 let currentPreset;
+let colors;
 
 function choosePreset(newPreset) {
     if (newPreset == currentPreset) {
@@ -86,6 +90,7 @@ function clearAndCalculate() {
     lowerEnvelope = Array(resolution + 1);
     upperEnvelope = Array(resolution + 1);
 
+    resolutionMaxRatio = xMax / resolution;
     f1 = freq + df;
     f2 = freq - df;
 
@@ -135,41 +140,44 @@ function plot() {
     let dataFirst = [
         {
             data: first,
-            color: "green",
-            shadowSize: 0
+            color: colors.firstWave,
+            shadowSize: 0,
+            label: "y\u2081"
         },
         {
-            data: [firstUpperPoint], color: "red", points: {
-                radius: circleSize, show: true, fill: true, fillColor: "red"
-            }
+            data: [firstUpperPoint], color: colors.dot, points: {
+                radius: circleSize, show: true, fill: true, fillColor: colors.dot, shadowSize: 0
+            },
+            shadowSize: 0
         }
     ];
     let dataSecond = [
         {
             data: second,
-            color: "blue",
-            shadowSize: 0
+            color: colors.secondWave,
+            shadowSize: 0,
+            label: "y\u2082"
         },
         {
             data: [secondUpperPoint],
-            color: "red",
+            color: colors.dot,
             points: {
-                radius: circleSize, show: true, fill: true, fillColor: "red"
+                radius: circleSize, show: true, fill: true, fillColor: colors.dot
             }
         }];
     let dataSum = [
         {
-            data: sum, color: "rgb(0, 255, 0)", shadowSize: 0
+            data: sum, color: colors.sumWave, shadowSize: 0, label: "y\u2081 + y\u2082"
         },
         {
-            data: lowerEnvelope, color: "orange", shadowSize: 0
+            data: lowerEnvelope, color: colors.envelope, shadowSize: 0
         },
         {
-            data: upperEnvelope, color: "orange", shadowSize: 0
+            data: upperEnvelope, color: colors.envelope, shadowSize: 0
         },
         {
-            data: [sumPoint], color: "red", shadowSize: 0, lines: {show: true}, points: {
-                radius: circleSize, show: true, symbol: "circle", fill: true, fillColor: "red"
+            data: [sumPoint], color: colors.dot, shadowSize: 0, lines: {show: true}, points: {
+                radius: circleSize, show: true, symbol: "circle", fill: true, fillColor: colors.dot
             }
         }];
 
@@ -179,16 +187,34 @@ function plot() {
 }
 
 function plotToCanvas(d1, d2, d3) {
-    $.plot(document.getElementById("firstWave"), d1, {yaxis: {min: yMin, max: yMax}, xaxis: {min: xMin, max: xMax}});
-    $.plot(document.getElementById("secondWave"), d2, {yaxis: {min: yMin, max: yMax}, xaxis: {min: xMin, max: xMax}});
+    $.plot(document.getElementById("firstWave"), d1, {
+        yaxis: {min: yMin, max: yMax}, xaxis: {min: xMin, max: xMax}, legend: {
+            show: true,
+            backgroundOpacity: 0,
+            position: "ne",
+        }
+    });
+    $.plot(document.getElementById("secondWave"), d2, {
+        yaxis: {min: yMin, max: yMax}, xaxis: {min: xMin, max: xMax}, legend: {
+            show: true,
+            backgroundOpacity: 0,
+            position: "ne",
+
+        }
+    });
     $.plot(document.getElementById("sumWave"), d3, {
-        yaxis: {min: 2 * yMin, max: 2 * yMax}, xaxis: {min: xMin, max: xMax}
+        yaxis: {min: -2.5, max: 2.5}, xaxis: {min: xMin, max: xMax}, legend: {
+            show: true,
+            backgroundOpacity: 0,
+            position: "ne",
+        }
     });
 }
 
 window.onload = function () {
     t = 0;
-    requestAnimationFrame(plot);
     init();
     choosePreset("below0");
+    requestAnimationFrame(plot);
 };
+
