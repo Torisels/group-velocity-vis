@@ -2,25 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6cf6b3d8-fdd2-4ebf-873f-6090ad816361" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/js/colorsSettings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/fizyka.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fizyka.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/normalize.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/TOC.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/css.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/extend.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/faq.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/html.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/js.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/misc.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/usage.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/plugins.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/js/ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/wave.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/wave.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +62,8 @@
       <workItem from="1655749506503" duration="6281000" />
       <workItem from="1655840319546" duration="6044000" />
       <workItem from="1656001496662" duration="1996000" />
-      <workItem from="1656153995991" duration="6799000" />
+      <workItem from="1656153995991" duration="7109000" />
+      <workItem from="1656359784447" duration="7930000" />
     </task>
     <task id="LOCAL-00001" summary="Changes">
       <created>1654894647629</created>
@@ -106,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655675235643</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add final impl">
+      <created>1656201057272</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1656201057272</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,7 +123,8 @@
     <MESSAGE value="Add working samples" />
     <MESSAGE value="clean up code" />
     <MESSAGE value="Add btns" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add btns" />
+    <MESSAGE value="Add final impl" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add final impl" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -138,7 +133,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/main.js</url>
-          <line>118</line>
+          <line>134</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

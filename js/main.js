@@ -11,15 +11,16 @@ const yMax = -yMin;
 let resolution = 1000;
 let resolutionMaxRatio;
 const circleSize = 4;
-
+let isAutomatic = true;
 // wave constants
 let speedMultiplier = 1;
 const dt_c = 0.25;
 let dt = speedMultiplier * dt_c;
 const k = 20;
-const dk = 0.05 * k;
-const k1 = k + dk;
-const k2 = k - dk;
+let dk = 0.05 * k;
+let k1;
+let k2;
+
 const freq = 1;
 const basedf = 0.07;
 // global variables for waves
@@ -55,7 +56,8 @@ let upperEnvelope = Array(resolution + 1);
 let sumPoint;
 let firstUpperPoint;
 let secondUpperPoint;
-let currentPreset;
+let currentPreset = "";
+let lastPreset = "";
 let colors;
 
 function choosePreset(newPreset) {
@@ -66,14 +68,17 @@ function choosePreset(newPreset) {
     switch (newPreset) {
         case "below0":
             df = -1 * basedf;
+            dk = 0.05 * k;
             clearAndCalculate();
             break;
         case "equal0":
             df = 0.0;
+            dk = 0.05 * k;
             clearAndCalculate();
             break;
         case "above0":
             df = basedf;
+            dk = 0.05 * k;
             clearAndCalculate();
             break;
         default:
@@ -91,8 +96,17 @@ function clearAndCalculate() {
     upperEnvelope = Array(resolution + 1);
 
     resolutionMaxRatio = xMax / resolution;
-    f1 = freq + df;
-    f2 = freq - df;
+
+    if (isAutomatic) {
+        f1 = freq + df;
+        f2 = freq - df;
+        dk = 0.05 * k;
+        k1 = k + dk;
+        k2 = k - dk;
+    } else {
+        df = (f1 - f2) / 2;
+        dk = (k1 - k2) / 2;
+    }
 
     v1 = f1 / k1;
     v2 = f2 / k2;
@@ -216,5 +230,7 @@ window.onload = function () {
     init();
     choosePreset("below0");
     requestAnimationFrame(plot);
+    fillInputs(k1, k2, f1, f2);
+
 };
 

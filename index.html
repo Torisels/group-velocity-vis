@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
     <style>
         .splitscreen {
             display: flex;
@@ -24,7 +26,10 @@
             justify-content: flex-end;
         }
 
-
+        .center-span {
+            display: flex;
+            justify-content: center
+        }
     </style>
 </head>
 <body>
@@ -35,7 +40,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
 <script src="js/colorsSettings.js"></script>
 <script src="js/ui.js"></script>
@@ -48,33 +53,74 @@
 
     </div>
 </nav>
-<div class="row m-0" style="height: 95vh; margin-top: 1vh">
+<div class="row m-0" style="height: 91vh; margin-top: 1vh">
     <div class="col-9">
-        <!--        <span>y<sub>1</sub></span>-->
         <div class="row h-25">
             <div id="firstWave">
             </div>
         </div>
-        <!--        <span>y<sub>2</sub></span>-->
         <div class="row h-25">
             <div id="secondWave"></div>
         </div>
-        <!--        <span>y<sub>1</sub>+y<sub>2</sub></span>-->
         <div class="row h-50">
             <div id="sumWave"></div>
         </div>
     </div>
+
     <div class="col-2" style="margin-top: 8px">
-        <div>Choose preset:</div>
-        <div class="btn-group col-12" role="group" aria-label="Basic example" style="margin-top: 10px">
-            <button type="button" id="btn-below0" class="btn btn-secondary active preset-clicker">V<sub>g</sub> < 0
-            </button>
-            <button type="button" id="btn-equal0" class="btn btn-secondary preset-clicker">V<sub>g</sub> = 0
-            </button>
-            <button type="button" id="btn-above0" class="btn btn-secondary preset-clicker">V<sub>g</sub> > 0
-            </button>
+        <div class="row">
+            <div class="l col-6">Choose mode:</div>
+            <div class="r col-6">
+                <input type="checkbox" checked data-toggle="toggle" data-on="Automatic" data-off="Manual"
+                       data-onstyle="secondary" data-offstyle="warning" id="btn-mode">
+            </div>
         </div>
-        <br>
+        <div id="automatic-box">
+            <div>Choose preset:</div>
+            <div class="btn-group col-12" role="group" aria-label="Basic example" style="margin-top: 10px">
+                <button type="button" id="btn-below0" class="btn btn-secondary active preset-clicker">V<sub>g</sub> < 0
+                </button>
+                <button type="button" id="btn-equal0" class="btn btn-secondary preset-clicker">V<sub>g</sub> = 0
+                </button>
+                <button type="button" id="btn-above0" class="btn btn-secondary preset-clicker">V<sub>g</sub> > 0
+                </button>
+            </div>
+        </div>
+        <div id="manual-box" class="d-none">
+            <div>Manually enter values:</div>
+            <div class="input-group input-group-sm mb-3 " style="margin-top: 10px">
+                <div class="input-group-prepend col-2">
+                    <span class="input-group-text center-span">k<sub>1</sub></span>
+                </div>
+                <input readonly type="text" class="form-control params-input" aria-label="Small"
+                       aria-describedby="inputGroup-sizing-sm"
+                       id="inp-k1">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend col-2">
+                    <span class="input-group-text center-span">k<sub>2</sub></span>
+                </div>
+                <input type="text" class="form-control params-input" aria-label="Small"
+                       aria-describedby="inputGroup-sizing-sm"
+                       id="inp-k2">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend col-2">
+                    <span class="input-group-text center-span" style="">f<sub>1</sub></span>
+                </div>
+                <input type="text" class="form-control params-input" aria-label="Small"
+                       aria-describedby="inputGroup-sizing-sm"
+                       id="inp-f1">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend col-2">
+                    <span class="input-group-text center-span">f<sub>2</sub></span>
+                </div>
+                <input type="text" class="form-control params-input" aria-label="Small"
+                       aria-describedby="inputGroup-sizing-sm"
+                       id="inp-f2">
+            </div>
+        </div>
         <label for="speedRange" class="form-label" style="margin-top: 10px">Speed: (<span
                 id="speedSpan">1</span>x)</label>
         <input type="range" class="form-range" id="speedRange" min="0.0" max="2" step="0.01" value="1">
@@ -153,6 +199,16 @@
     </div>
 
 </div>
+
+<footer class="bg-light text-center">
+    <!-- Copyright -->
+    <div class=" bg-light" style="height: 4vh;  display: flex; align-items: center; ">
+        <span style=" display: table;
+    margin: 0 auto;">© 2022 Designed by Gustaw Daczkowski</span>
+
+    </div>
+    <!-- Copyright -->
+</footer>
 
 </body>
 

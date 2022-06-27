@@ -30,6 +30,8 @@ function init() {
             }
             this.classList.add("active");
             choosePreset(this.id.replace('btn-', ''));
+            fillInputs(k1, k2, f1, f2);
+
         }
     }
 
@@ -95,6 +97,8 @@ function init() {
         saveColorsToLS(colors);
     });
 
+    handleModeChange(document.getElementById("btn-mode").checked);
+
     document.getElementById("resetColors").onclick = function () {
 
         const firstColor = [233, 30, 99];
@@ -112,10 +116,92 @@ function init() {
         saveColorsToLS(colors);
 
     }
+    document.getElementById("btn-mode").onchange = function () {
+        console.log(this.checked);
+        handleModeChange(this.checked);
+    };
+
+    //
+    // $(".params-input").oninput = function(){
+    //     this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+    // };
+
+    document.querySelectorAll('.params-input').forEach(function (input) {
+        input.oninput = function () {
+            this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+            const v = parseFloat(this.value);
+            setVariable(this.id, v)
+        };
+    });
+
+    function setVariable(elementId, value) {
+        if (!isNaN(value)) {
+            switch (elementId) {
+                case "inp-k1":
+                    k1 = value;
+                    clearAndCalculate();
+                    break;
+                case "inp-k2":
+                    k2 = value;
+                    clearAndCalculate();
+                    break;
+
+                case "inp-f1":
+                    f1 = value;
+                    clearAndCalculate();
+                    break;
+                case "inp-f2":
+                    f2 = value;
+                    clearAndCalculate();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
+
 
 function saveColorsToLS(colorObj) {
     localStorage.setItem('colorsSetting', JSON.stringify(colorObj));
+}
+
+function fillInputs(k1, k2, f1, f2) {
+    document.getElementById("inp-k1").value = k1;
+    document.getElementById("inp-k2").value = k2;
+    document.getElementById("inp-f1").value = Math.round((f1 + Number.EPSILON) * 100) / 100;
+    document.getElementById("inp-f2").value = Math.round((f2 + Number.EPSILON) * 100) / 100;
+
+}
+
+
+function handleModeChange(newMode) {
+    if (newMode === true) {
+        isAutomatic = true;
+        document.querySelectorAll('.params-input').forEach(function (input) {
+            input.readOnly = true;
+        });
+        $(".preset-clicker").removeAttr('disabled');
+
+        if (lastPreset) {
+            document.getElementById("btn-" + lastPreset).click();
+
+        } else {
+            document.getElementById("btn-below0").click();
+        }
+        $("#manual-box").addClass("d-none");
+        $("#automatic-box").removeClass("d-none");
+    } else {
+        isAutomatic = false;
+        lastPreset = currentPreset;
+        currentPreset = "";
+        $(".preset-clicker").attr('disabled', 'disabled');
+        document.querySelectorAll('.params-input').forEach(function (input) {
+            input.readOnly = false;
+        });
+        $("#manual-box").removeClass("d-none");
+        $("#automatic-box").addClass("d-none");
+    }
 }
 
 
